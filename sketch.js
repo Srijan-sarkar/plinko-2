@@ -8,7 +8,7 @@ var plinkos =  [];
 var divisions = [];
 
 var score = 0,
-    particle = 0,
+    particle=null,
     turn = 0,
     gamestate = "play";
 
@@ -59,7 +59,7 @@ function setup() {
 function mousePressed(){
   if (gamestate!=="end"){
     turn++
-    particle = new Particle(random(width/2-30, width/2+30), 10,10);
+    particle = new Particle(mouseX,0 ,10);
   }
 }
  
@@ -79,11 +79,26 @@ function draw() {
    }
    
  
-  ///for (var j = 0; j < particles.length; j++) {
- 
+  if (particle!==null) {
      particle.display();
-   
-     //}
+  
+ 
+  if(particle.body.position.y>760){
+    if(particle<300){
+      score=score+500;
+      
+    }
+    if(particle.body.position.x>300&&particle.body.position.x<600){
+      score=score+200;
+      
+    }
+    if(particle.body.position.x>600){
+      score=score+100;
+      
+    }
+  }   
+}  
+    
    for (var k = 0; k < divisions.length; k++) {
      
      divisions[k].display();
